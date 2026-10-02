@@ -1,0 +1,138 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml (v0.4): repo-root metadata for formalization projects.
+
+version: "v0.4"
+
+project:
+  name: "kissing-number-3: the kissing number in dimension 3"
+  description: >-
+    An AI-produced warrant, meaning a machine-checked Lean proof that no human has digested, of the classical theorem
+    that the kissing number of R^3 is 12. Lower bound: twelve explicit rational points. Upper bound: an exact
+    Bachoc-Vallentin three-point semidefinite certificate (total degree 10) for thirteen unit vectors with pairwise
+    inner products at most 1/2, checked by `decide +kernel`. The repository also contains the certificate as JSON
+    with an independent exact checker in Python.
+  authors:
+    - "alejandrozarco (repository owner; directed the work)"
+    - "Claude Opus 5.5 (Anthropic), AI model that produced the certificate and Lean code"
+  responsible_maintainers:
+    - "alejandrozarco"
+  license: "Apache-2.0 (LICENSE); not covering the regenerated upstream code or the upstream material in adapted declarations (README, Licence)"
+
+sources:
+  - title: "Das Problem der dreizehn Kugeln"
+    authors: ["K. Schütte", "B. L. van der Waerden"]
+    id: "Math. Ann. 125 (1953), 325-334"
+    type: "article"
+    relationship: "other"
+    note: "Source of the theorem. Its proof is not the one formalised here."
+    author_endorsement: "n/a"
+  - title: "New upper bounds for kissing numbers from semidefinite programming"
+    authors: ["C. Bachoc", "F. Vallentin"]
+    id: "J. Amer. Math. Soc. 21 (2008), 909-924"
+    type: "article"
+    relationship: "background"
+    note: "The three-point method. The Lean version of its positivity theorem on S^2 is upstream's (`bv_positivity`)."
+    author_endorsement: "not-contacted"
+  - title: "Fixed-n three-point certificate for thirteen points (this repository)"
+    type: "original-proof"
+    relationship: "formalizes"
+    note: "AI-produced; numerics/kissing3/ and lean/Kissing/. Not refereed."
+    author_endorsement: "n/a"
+
+related_formalizations:
+  - id: "https://github.com/huwngtran/thomson-n7-lean"
+    revision: "25f2fa53119273458cfbb3c4230904bffdd61e53"
+    relationship: "builds-on"
+    note: >-
+      Three-point machinery. Unchanged declarations are regenerated from it by lean/regen.sh and are not stored here.
+      Adapted declarations are stored with per-declaration attribution.
+  - id: "https://github.com/alejandrozarco/thomson-n7-log"
+    relationship: "builds-on"
+    note: "Splitter, upstream-text scanner and certificate emitter utilities."
+
+classification:
+  arxiv: ["math.MG", "math.OC"]
+  msc2020: ["52C17", "05B40", "90C22", "03B35"]
+
+status:
+  scope: "kappa(3) = 12, with arrangements of any cardinality (sizes in ENat)."
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+  main_results:
+    - declaration: "Kissing.kissingNumber_three"
+      file: "lean/Kissing/Solution.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "lean/comparator.json"
+      literature_dependencies: []
+    - declaration: "Kissing.encard_le_twelve_of_isKissing"
+      file: "lean/Kissing/Solution.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "lean/comparator.json"
+      literature_dependencies: []
+    - declaration: "Kissing.exists_isKissing_encard_eq_twelve"
+      file: "lean/Kissing/Solution.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "lean/comparator.json"
+      literature_dependencies: []
+  notes: >-
+    Statement file: lean/Kissing/Statement.lean (sorry by design). Comparator, axioms and a clean build of a fresh copy
+    of the package are recorded in verification/. No `native_decide`.
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["claude-opus-5-5"]
+      framework: "Claude Code"
+      tool_setup: >-
+        Claude Opus 5.5 with terminal access. Python (cvxpy/Clarabel, numpy, python-flint) for SDP solving, exact
+        rounding and checking. Lean 4 v4.34.1 + Mathlib, modules built one at a time on a Linux workstation.
+      cost:
+        wall_time: "about 1 day (2026-10-01 to 2026-10-02)"
+        spend_usd: "subscription-based usage"
+        hardware: "Apple-silicon laptop; Linux workstation (6 cores, 19 GB RAM) for Lean builds"
+      prompting_notes: >-
+        The owner set the goal, approved the statement file and decided on scope and publication. Plans and results
+        are recorded in a development journal (not public).
+    - method: "agent"
+      models: ["claude-opus-5-5"]
+      framework: "Claude Code"
+      tool_setup: "A separate read-only reviewer instance without the working context."
+      prompting_notes: "Adversarial review of statement fidelity, the new checker and the lower bound; see AI_DISCLOSURE.md."
+  spend_usd: "subscription-based usage (not separately metered)"
+  notes: "See AI_DISCLOSURE.md."
+
+fidelity:
+  divergences: >-
+    - The upper bound is formalised with a three-point certificate, not with the 1953 argument.
+    - The twelve points are rational approximations of the icosahedron vertices (exact norm 2, pairwise distance at
+      least 2), not the regular icosahedron itself.
+
+review:
+  status: "agent-reviewed"
+  reviewers:
+    - "Claude Opus 5.5 (read-only reviewer instance)"
+  notes: "No human expert has checked the formalisation. Comments and checks are welcome via GitHub issues."
+
+alignment:
+  namespace: "Kissing"
+  statements:
+    - source: "kappa(3) = 12 (Schütte and van der Waerden 1953)"
+      lean: "Kissing.kissingNumber_three"
+      module: "lean/Kissing/Solution.lean (statement: lean/Kissing/Statement.lean)"
+      status: "proved"
+    - source: "every kissing arrangement in R^3 has at most 12 balls"
+      lean: "Kissing.encard_le_twelve_of_isKissing"
+      module: "lean/Kissing/Solution.lean (statement: lean/Kissing/Statement.lean)"
+      status: "proved"
+    - source: "12 balls can touch a central ball in R^3"
+      lean: "Kissing.exists_isKissing_encard_eq_twelve"
+      module: "lean/Kissing/Solution.lean (statement: lean/Kissing/Statement.lean)"
+      status: "proved"
+
+acknowledgements: >-
+  Built on huwngtran/thomson-n7-lean (three-point machinery for S^2). Uses Mathlib, Lean 4, and Python numerical
+  libraries.

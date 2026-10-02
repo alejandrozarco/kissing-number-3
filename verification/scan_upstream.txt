@@ -1,0 +1,22 @@
+NEAR      Kissing/Bound.lean:24-66  Kissing.three_point_bound_of_forall ~ upstream ThomsonN7.ThreePoint.three_point_bound_cut  ratio 0.834  attributed
+NEAR      Kissing/Cert/ChkId.lean:28-39  Kissing.Cert.cf_chk ~ upstream ThomsonN7.Case1.cf_chk  ratio 0.904  attributed
+COMMENT   Kissing/Cert/ChkId.lean:21  8-word run shared with an upstream comment (upstream line 10430, ThomsonN7.Case1.c1_idE_stat)  attributed
+NEAR      Kissing/Cert/OkF.lean:13-15  Kissing.Cert.cf_blocks ~ upstream ThomsonN7.Case1.cf_blocks  ratio 0.932  attributed
+NEAR      Kissing/CertK.lean:76-78  Kissing.gKE ~ upstream ThomsonN7.Cert.gE  ratio 0.875  attributed
+NEAR      Kissing/CertK.lean:80-85  Kissing.gKE_nonneg ~ upstream ThomsonN7.Cert.gE_nonneg  ratio 0.835  attributed
+NEAR      Kissing/CertK.lean:87-91  Kissing.KBlk ~ upstream ThomsonN7.Cert.SBlk  ratio 0.862  attributed
+NEAR      Kissing/CertK.lean:101-106  Kissing.kblk_sum_nonneg ~ upstream ThomsonN7.Cert.sos_sum_nonneg  ratio 0.892  attributed
+NEAR      Kissing/CertK.lean:119-120  Kissing.CertK.blk ~ upstream ThomsonN7.Cert.Cert3.blk  ratio 0.976  attributed
+NEAR      Kissing/CertK.lean:122-123  Kissing.CertK.m ~ upstream ThomsonN7.Cert.Cert3.m  ratio 0.978  attributed
+NEAR      Kissing/CertK.lean:125-126  Kissing.CertK.K ~ upstream ThomsonN7.Cert.Cert3.K  ratio 0.967  attributed
+NEAR      Kissing/CertK.lean:128-130  Kissing.CertK.Fm ~ upstream ThomsonN7.Cert.Cert3.Fm  ratio 0.986  attributed
+NEAR      Kissing/CertK.lean:132-136  Kissing.CertK.idE ~ upstream ThomsonN7.Cert.Cert3.idE  ratio 0.854  attributed
+NEAR      Kissing/CertK.lean:138-142  Kissing.CertK.check ~ upstream ThomsonN7.Cert.Cert3.check  ratio 0.943  attributed
+NEAR      Kissing/CertK.lean:144-150  Kissing.CertK.check_parts ~ upstream ThomsonN7.Cert.Cert3.check_parts  ratio 0.954  attributed
+NEAR      Kissing/CertK.lean:172-194  Kissing.CertK.hpt ~ upstream ThomsonN7.Cert.Cert3.hpt_gramCut  ratio 0.934  attributed
+NEAR      Kissing/CertK.lean:215-225  Kissing.kStat_idE ~ upstream ThomsonN7.Case1.c1Stat_idE  ratio 0.826  attributed
+LINES     Kissing/CertK.lean:60-62  3 lines of Kissing.codeK_nonneg identical to upstream ThomsonN7.Cert.codeE_nonneg  attributed
+COMMENT   Kissing/CertK.lean:46  8-word run shared with an upstream comment (upstream line 2512, ThomsonN7.Cert.codeE)  attributed
+COMMENT   Kissing/CertK.lean:108  8-word run shared with an upstream comment (upstream line 2638, ThomsonN7.Cert.Cert3)  attributed
+scanned 33 stored files against 2788 upstream declarations: 0 verbatim, 17 near-copies, 0 without attribution
+PASS

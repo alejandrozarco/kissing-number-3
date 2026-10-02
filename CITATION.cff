@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this material, please cite it as below. Not peer reviewed. Produced by AI models under the direction of the repository owner (see AI_DISCLOSURE.md)."
+title: "The kissing number in dimension 3 is 12: a Lean 4 formalisation via a three-point certificate"
+type: software
+license: Apache-2.0
+repository-code: "https://github.com/alejandrozarco/kissing-number-3"
+authors:
+  - name: alejandrozarco
+abstract: >-
+  A Lean 4 proof, checked by the Lean kernel, that the kissing number of three-dimensional space is 12: twelve explicit
+  points for the lower bound, and an exact Bachoc-Vallentin three-point certificate for thirteen points for the upper
+  bound. Not peer reviewed.
+keywords:
+  - kissing number
+  - thirteen spheres problem
+  - semidefinite programming
+  - three-point bound
+  - computer-assisted proof
+  - Lean 4

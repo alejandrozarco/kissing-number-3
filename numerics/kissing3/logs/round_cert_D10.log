@@ -1,0 +1,23 @@
+[   0.0s] sol/fixn_D10_n13_mu0.5.npz: D=10 n=13 mu=1.19e-05 float e=0.0353223 -> exact e=1/32, KBITS=24
+[   0.1s] exact target P: 150 monomials, degree 10
+[   0.3s] rounding residual: 238 monomials, max |non-constant coef| 4.86e-06; constant 5.29652e-05 (expected about the dropped e/C(n,2) = 5.22089e-05)
+[   0.3s] WARNING: residual not small against mu; positive definiteness may fail
+[   0.4s] identity P == sum_r g_r z^T B_r z holds exactly
+[   0.4s]                     F0: size   6, positive definite, min pivot 1.4e-05
+[   0.4s]                     F1: size   5, positive definite, min pivot 2.12e-05
+[   0.4s]                     F2: size   4, positive definite, min pivot 1.72e-05
+[   0.4s]                     F3: size   3, positive definite, min pivot 1.58e-05
+[   0.4s]                     F4: size   2, positive definite, min pivot 0.00966
+[   0.4s]                     F5: size   1, positive definite, min pivot 1.19e-05
+[   1.4s]                   B0:1: size  56, positive definite, min pivot 1.37e-05
+[   1.4s]                 B1:1+u: size  35, positive definite, min pivot 1.19e-05
+[   1.6s]               B2:1/2-u: size  35, positive definite, min pivot 1.2e-05
+[   1.8s]        B3:(1+u)(1/2-u): size  35, positive definite, min pivot 1.54e-05
+[   1.9s]                 B4:1+v: size  35, positive definite, min pivot 1.19e-05
+[   2.0s]               B5:1/2-v: size  35, positive definite, min pivot 1.2e-05
+[   2.1s]        B6:(1+v)(1/2-v): size  35, positive definite, min pivot 1.27e-05
+[   2.2s]                 B7:1+t: size  35, positive definite, min pivot 1.19e-05
+[   2.3s]               B8:1/2-t: size  35, positive definite, min pivot 1.2e-05
+[   2.5s]        B9:(1+t)(1/2-t): size  35, positive definite, min pivot 1.26e-05
+[   2.5s]               B10:detG: size  20, positive definite, min pivot 1.2e-05
+[   2.5s] wrote cert_D10.json (234 KiB); Lam = 2^? : 32 bits, max |entry|*Lam: 32 bits
