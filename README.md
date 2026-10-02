@@ -45,7 +45,8 @@ Checks recorded in [`verification/`](verification/):
 - Comparator: the six theorems of `lean/comparator.json` have the statements of `lean/Kissing/Statement.lean`, use only
   the axioms `propext`, `Quot.sound`, `Classical.choice`, and are accepted by the Lean kernel.
 - `#print axioms` for all six: `[propext, Classical.choice, Quot.sound]`.
-- A clean build from a fresh copy of the package: 45.5 min, peak memory 9.4 GB.
+- A clean build from a fresh copy of the package (Mathlib from the cache): the whole check took 45.5 min wall time with
+  peak memory 9.4 GB (`verification/time.txt`); the Comparator step alone 29.7 min (`verification/comparator.out`).
 
 The files contain no `sorry` outside `Statement.lean` and no `native_decide`.
 
@@ -83,7 +84,8 @@ $`1 + 2uvt - u^2 - v^2 - t^2`$, with Gram matrices of sizes 56, 35 (nine times) 
 | `Kissing/Solution.lean` | the statements of `Statement.lean`, with proofs |
 
 The certificate was found in floating point (`numerics/kissing3/k3.py`), rounded to exact rationals with denominators
-dividing $`2^{25} \cdot 78`$ (`numerics/kissing3/round_k3.py`), and checked in exact
+dividing $`2^{25} \cdot 78`$ (`numerics/kissing3/round_k3.py`; the Lean encoding uses the common denominator
+$`2^{53} \cdot 78`$), and checked in exact
 arithmetic by an independent script (`numerics/kissing3/check_cert_k3.py`) before the Lean check.
 
 ## Figure
@@ -96,7 +98,7 @@ Regenerate with `python3 figures/make_figures.py` (matplotlib 3.9.4).
 </picture>
 
 Floating-point values from `numerics/kissing3/results.jsonl` (not certified): the two-point (Delsarte) bound stays at
-13.158; the three-point bound falls below 13 from degree 10; the fixed-$`n`$ problem used here is feasible for
+above 13.158; the three-point bound falls below 13 from degree 10; the fixed-$`n`$ problem used here is feasible for
 $`n = 13`$ from degree 10 (bars: the bracket of its threshold in $`n`$).
 
 ## Contents
@@ -109,6 +111,8 @@ $`n = 13`$ from degree 10 (bars: the bracket of its threshold in $`n`$).
 | `verification/` | records of the clean build, Comparator, axioms and the upstream-text scan |
 | `figures/` | the figure and `make_figures.py` |
 | `formalization.yaml` | metadata (mathlib-initiative format v0.4) |
+| `AI_DISCLOSURE.md` | how AI models were used, what is checked and what is trusted |
+| `LICENSE`, `CITATION.cff` | licence (Apache-2.0) and citation metadata |
 | `MANIFEST.sha256` | sha256 of every file |
 
 ## Reproduce
@@ -117,7 +121,7 @@ Lean (toolchain `leanprover/lean4:v4.34.1`, Mathlib `d13f23b`, both pinned):
 
 ```sh
 cd lean
-./regen.sh                    # regenerates the eight upstream-derived modules ThomsonGen/*.lean, checks sha256
+./regen.sh                    # regenerates ThomsonGen/*.lean from upstream; checks the eight imported ones by sha256
 lake exe cache get
 bash scripts/build_test.sh    # every module one at a time (or: lake build, if the machine has enough memory)
 lake env lean Kissing/Axioms.lean
@@ -141,8 +145,9 @@ python3 ../../lean/gen/emit_k3.py cert_D10.json --outdir /tmp/Cert       # re-em
 - The three-point machinery (Bachoc–Vallentin positivity on $`S^2`$, the three-point identity, the integer certificate
   format with the Kronecker check) is from the Lean formalisation of the Coulomb Thomson problem,
   [huwngtran/thomson-n7-lean](https://github.com/huwngtran/thomson-n7-lean) at commit `25f2fa5`. That repository has no
-  licence file, so its code is not stored here: `lean/regen.sh` downloads the pinned file, regenerates the eight modules
-  used, and checks them against `lean/ThomsonGen/scripts/generated.sha256`. Declarations adapted from it name their
+  licence file, so its code is not stored here: `lean/regen.sh` downloads the pinned file, regenerates the
+  upstream-derived `ThomsonGen/` modules, and checks the eight that are imported against
+  `lean/ThomsonGen/scripts/generated.sha256`. Declarations adapted from it name their
   upstream source in a comment after the imports; `lean/ThomsonGen/scripts/scan_upstream.py` checks this
   (`verification/scan_upstream.txt`: 0 verbatim declarations, all near-copies attributed).
 - The splitter `split.py`, the scanner, and `lean/gen/cert3_util.py` are from
@@ -161,5 +166,5 @@ python3 ../../lean/gen/emit_k3.py cert_D10.json --outdir /tmp/Cert       # re-em
 ## Licence
 
 Apache License 2.0 ([`LICENSE`](LICENSE)), copyright 2026 the repository owner (alejandrozarco). Not covered: the
-upstream modules that `lean/regen.sh` regenerates (not stored here), and the upstream material in the adapted
-declarations named in the files.
+upstream modules that `lean/regen.sh` regenerates (not stored here), the upstream material in the adapted
+declarations named in the files, and the upstream material in `lean/scripts/run_comparator.sh`.

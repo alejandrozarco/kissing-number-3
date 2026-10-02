@@ -4,6 +4,7 @@ Usage: python3 figures/make_figures.py   (writes figures/bounds_{light,dark}.svg
 import json, os
 import matplotlib
 matplotlib.use("svg")
+matplotlib.rcParams["svg.hashsalt"] = "kissing-number-3"   # deterministic SVG ids
 import matplotlib.pyplot as plt
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -55,7 +56,7 @@ def draw(dark):
         t.set_color(fg)
     ax.set_title("Floating-point bounds (numerics/kissing3/results.jsonl)", color=fg, fontsize=10)
     fig.tight_layout()
-    fig.savefig(os.path.join(HERE, f"bounds_{'dark' if dark else 'light'}.svg"), facecolor=bg)
+    fig.savefig(os.path.join(HERE, f"bounds_{'dark' if dark else 'light'}.svg"), facecolor=bg, metadata={"Date": None})
 
 
 for dark in (False, True):

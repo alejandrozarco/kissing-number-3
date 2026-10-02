@@ -31,6 +31,10 @@ this is a *warrant*, not a human-readable proof.
 
 What remains to be trusted:
 - that `lean/Kissing/Statement.lean` expresses the intended theorem (see `lean/STATEMENT.md`);
+- the Mathlib definitions used in `lean/Kissing/Statement.lean`, which imports only Mathlib;
 - the Lean kernel and toolchain;
-- the definitions regenerated from the upstream formalisation,
-  [huwngtran/thomson-n7-lean](https://github.com/huwngtran/thomson-n7-lean), which was itself produced with AI agents.
+- Comparator and lean4export (run without the `landrun` sandbox).
+
+The code regenerated from the upstream formalisation,
+[huwngtran/thomson-n7-lean](https://github.com/huwngtran/thomson-n7-lean) (itself produced with AI agents), is used only
+inside the proof, which the kernel checks; it does not enter the statement.

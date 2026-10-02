@@ -6,13 +6,14 @@ the package, `regen.sh` (`regen.out`: the eight upstream-derived modules match `
 
 | file | content |
 |---|---|
-| `comparator.out` | full `lake build` of `Kissing.Statement` and `Kissing.Solution` from scratch, lean4export, "Lean default kernel accepts the solution", "Your solution is okay!", exit 0, for the six theorems of `lean/comparator.json` |
+| `comparator.out` | full `lake build` of `Kissing.Statement` and `Kissing.Solution` from scratch (Mathlib from the cache), lean4export, "Lean default kernel accepts the solution", "Your solution is okay!", exit 0, for the six theorems of `lean/comparator.json` |
 | `axioms.out` | `#print axioms`: `[propext, Classical.choice, Quot.sound]` for all six |
-| `files.sha256` | sha256 of every `.lean` file and the Lake configuration checked |
+| `files.sha256` | sha256 of the Lean files present in the checked copy and the Lake configuration (`regen.sh` writes all split modules; eight of them are imported) |
+| `time.txt` | resource use of the whole check (GNU time): 45.5 min wall, peak resident memory 9.4 GB |
 | `regen.out` | output of `regen.sh` |
 | `scan_upstream.txt` | `lean/ThomsonGen/scripts/scan_upstream.py` on the stored Lean files of this revision: 0 verbatim, all near-copies attributed |
 
-Run: wall time 45.5 min, peak resident memory 9.4 GB (one process). Comparator ran with its non-sandboxing shim
+Comparator step: 29.7 min wall (`comparator.out`). Comparator ran with its non-sandboxing shim
 `fake-landrun.sh`, because `landrun` was not available on the machine.
 
 Differences between the checked revision and this repository: comment lines only, in `Kissing/Bound.lean`,

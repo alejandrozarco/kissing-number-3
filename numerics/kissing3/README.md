@@ -10,8 +10,8 @@ Floating-point SDP, exact rounding and exact check of the three-point certificat
 | `run.sh` | runs `k3.py` at low priority with one thread |
 | `results.jsonl`, `checks.jsonl` | outputs of `k3.py` and `check.py` (all degrees tried) |
 | `sol/fixn_D10_n13.npz`, `sol/fixn_D10_n13_mu0.5.npz` | the degree-10 solutions (maximal margin; interior, used for rounding) |
-| `round_k3.py` | exact rounding: blocks rounded to multiples of $`2^{-24}`$, margin $`e = 1/32`$, residual absorbed into the constant-multiplier block |
-| `cert_D10.json` | the exact certificate (rationals as strings) |
+| `round_k3.py` | exact rounding: blocks rounded to multiples of $`2^{-24}`$, margin $`e = 1/32`$, residual absorbed into the constant-multiplier block. Its log warns that the absorbed residual is not small compared with the interior margin; the exact positive-definiteness check that follows (and `check_cert_k3.py`) settles this |
+| `cert_D10.json` | the exact certificate (rationals as strings). Its multipliers are $`1/2 - x`$; `lean/gen/emit_k3.py` rescales those blocks by 2 for the Lean multipliers $`1 - 2x`$ |
 | `check_cert_k3.py` | independent exact check: the identity on an $`11^3`$ grid, positive definiteness by leading principal minors (python-flint) |
 | `logs/` | output of `round_k3.py` and `check_cert_k3.py` |
 

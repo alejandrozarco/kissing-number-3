@@ -2,7 +2,8 @@
 # Clean build test: compile every module of the package one at a time, in dependency order, single-threaded, and
 # record wall time and peak RSS per module. Run from a fresh checkout after ./regen.sh and `lake exe cache get`.
 # Usage: bash scripts/build_test.sh [out.tsv]          (default: build_test.tsv)
-# Needs GNU time (/usr/bin/time) and python3.
+# Needs GNU time (/usr/bin/time) and python3. Optional: BT_WRAP, a command prefix for each module's compile (for
+# example a lock on a shared machine).
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"; cd "$ROOT"
 OUT="${1:-build_test.tsv}"
@@ -30,7 +31,7 @@ printf "module\twall_s\tpeak_rss_kB\texit\n" > "$OUT"
 for M in $ORDER; do
   F="${M//.//}.lean"; B=".lake/build/lib/lean/${M//.//}"; mkdir -p "$(dirname "$B")"
   set +e
-  /usr/bin/time -f "%e %M" -o .bt.time lake env lean -j1 -DElab.async=false -o "$B.olean" -i "$B.ilean" "$F" \
+  ${BT_WRAP:-} /usr/bin/time -f "%e %M" -o .bt.time lake env lean -j1 -DElab.async=false -o "$B.olean" -i "$B.ilean" "$F" \
     > ".bt.$M.out" 2>&1
   RC=$?
   set -e
