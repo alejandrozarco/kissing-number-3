@@ -1,5 +1,7 @@
 # The kissing number in dimension 3: a Lean 4 formalisation with a three-point certificate
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23100212.svg)](https://doi.org/10.5281/zenodo.23100212)
+
 Status: **Lean 4 formalisation, not peer reviewed.** Prepared 2026-10-02. **Produced by AI models** under the direction
 of the repository owner; see [`AI_DISCLOSURE.md`](AI_DISCLOSURE.md).
 
@@ -9,6 +11,9 @@ of the repository owner; see [`AI_DISCLOSURE.md`](AI_DISCLOSURE.md).
 > correspondence with the stated theorem have not been checked by a human expert. We welcome a human review, and
 > credit for a readable treatment belongs to whoever writes one. Questions, checks and corrections:
 > [GitHub issues](https://github.com/alejandrozarco/kissing-number-3/issues).
+
+Archived on Zenodo: [10.5281/zenodo.23100212](https://doi.org/10.5281/zenodo.23100212) (all versions).
+Cite with `CITATION.cff`.
 
 The kissing number $`\kappa(d)`$ is the largest number of non-overlapping unit balls in $`\mathbb{R}^d`$ that touch a
 common unit ball. `lean/Kissing/Statement.lean` states, and the Lean kernel checks in `lean/Kissing/Solution.lean`:
@@ -88,16 +93,42 @@ dividing $`2^{25} \cdot 78`$ (`numerics/kissing3/round_k3.py`; the Lean encoding
 $`2^{53} \cdot 78`$), and checked in exact
 arithmetic by an independent script (`numerics/kissing3/check_cert_k3.py`) before the Lean check.
 
-## Figure
+## Figures
 
-Regenerate with `python3 figures/make_figures.py` (matplotlib 3.9.4).
+Regenerate with `python3 figures/make_figures.py` (matplotlib 3.9.4, numpy); every figure is computed from repository
+files only.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="figures/configuration_dark.svg">
+  <img alt="Left: a central unit ball with twelve touching unit balls. Right: the twelve centres on the sphere of radius 2, with the 30 nearest-neighbour pairs, which form the edges of an icosahedron" src="figures/configuration_light.svg">
+</picture>
+
+The twelve balls of the lower bound (`lean/Kissing/Twelve.lean`). Right: their centres, joined for the 30 pairs at the
+smallest angles, which form the edges of an icosahedron.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="figures/angles_dark.svg">
+  <img alt="The 66 angles between the twelve centres, sorted: 30 between 61 and 66 degrees, 30 between 114 and 119 degrees, 6 near 180 degrees; all above the 60 degree line" src="figures/angles_light.svg">
+</picture>
+
+The 66 angles between the twelve centres seen from the origin. Two balls touching the central ball overlap exactly
+when their angle is below $`60^\circ`$; the smallest angle is above $`61.31^\circ`$.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="figures/certificate_dark.svg">
+  <img alt="Heat map of minus R(u,u,t) divided by e/78 over the feasible region of the slice u = v; all values are at least 1.42" src="figures/certificate_light.svg">
+</picture>
+
+The certificate inequality $`R \le -e/78`$ with $`e = 1/32`$, evaluated in floating point from `cert_D10.json` on the
+slice $`u = v`$ of the region $`\Delta`$ (white: triples that are not inner products of unit vectors). The Lean check
+covers all of $`\Delta`$ exactly.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/bounds_dark.svg">
   <img alt="Floating-point upper bounds for the kissing number in dimension 3 by degree: two-point bound, three-point bound, and the threshold of the fixed-n three-point problem" src="figures/bounds_light.svg">
 </picture>
 
-Floating-point values from `numerics/kissing3/results.jsonl` (not certified): the two-point (Delsarte) bound stays at
+Floating-point values from `numerics/kissing3/results.jsonl` (not certified): the two-point (Delsarte) bound stays
 above 13.158; the three-point bound falls below 13 from degree 10; the fixed-$`n`$ problem used here is feasible for
 $`n = 13`$ from degree 10 (bars: the bracket of its threshold in $`n`$).
 
