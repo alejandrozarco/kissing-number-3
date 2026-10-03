@@ -50,8 +50,7 @@ Checks recorded in [`verification/`](verification/):
 - Comparator: the six theorems of `lean/comparator.json` have the statements of `lean/Kissing/Statement.lean`, use only
   the axioms `propext`, `Quot.sound`, `Classical.choice`, and are accepted by the Lean kernel.
 - `#print axioms` for all six: `[propext, Classical.choice, Quot.sound]`.
-- A clean build from a fresh copy of the package (Mathlib from the cache): the whole check took 45.5 min wall time with
-  peak memory 9.4 GB (`verification/time.txt`); the Comparator step alone 29.7 min (`verification/comparator.out`).
+- A clean build of every module, one at a time from a fresh copy, with wall time and peak memory (table below).
 
 The files contain no `sorry` outside `Statement.lean` and no `native_decide`.
 
@@ -170,6 +169,58 @@ python3 round_k3.py sol/fixn_D10_n13_mu0.5.npz cert.json 24               # re-r
 python3 ../../lean/gen/emit_k3.py cert_D10.json --outdir /tmp/Cert       # re-emit the Lean data
 ./run.sh fixn 10 13 && ./run.sh mu 10 13 0.5                              # re-solve (float)
 ```
+
+## Clean build
+
+Every module compiled one at a time (`lean/scripts/build_test.sh`, `lean -j1`) from a fresh copy of `lean/`
+after `regen.sh` and `lake exe cache get`, on Linux x86_64 (`verification/build_test.tsv`). Wall time includes
+loading Mathlib for each module.
+
+| module | wall (s) | peak RSS (GB) |
+|---|---:|---:|
+| `Kissing.Statement` | 307 | 6.3 |
+| `ThomsonGen.Preamble` | 47 | 6.4 |
+| `ThomsonGen.ThreePoint` | 49 | 6.5 |
+| `ThomsonGen.Kron` | 31 | 6.4 |
+| `ThomsonGen.Cert1` | 21 | 6.4 |
+| `ThomsonGen.Cert3` | 40 | 6.5 |
+| `ThomsonGen.Case1Stat` | 20 | 6.4 |
+| `ThomsonGen.M2` | 96 | 8.5 |
+| `ThomsonGen.CertF` | 30 | 6.4 |
+| `Kissing.Bound` | 22 | 6.4 |
+| `Kissing.CertK` | 25 | 6.4 |
+| `Kissing.Cert.Data` | 30 | 6.4 |
+| `Kissing.Cert.ChkF` | 34 | 6.5 |
+| `Kissing.Cert.ChkS0` | 86 | 8.8 |
+| `Kissing.Cert.ChkS1` | 37 | 7.1 |
+| `Kissing.Cert.ChkS2` | 37 | 7.1 |
+| `Kissing.Cert.ChkS3` | 26 | 7.1 |
+| `Kissing.Cert.ChkS4` | 26 | 7.1 |
+| `Kissing.Cert.ChkS5` | 33 | 7.1 |
+| `Kissing.Cert.ChkS6` | 37 | 7.1 |
+| `Kissing.Cert.ChkS7` | 37 | 7.1 |
+| `Kissing.Cert.ChkS8` | 27 | 7.1 |
+| `Kissing.Cert.ChkS9` | 36 | 7.1 |
+| `Kissing.Cert.ChkS10` | 22 | 6.5 |
+| `Kissing.Cert.ChkId` | 20 | 6.4 |
+| `Kissing.Cert.OkF` | 16 | 6.4 |
+| `Kissing.Cert.OkS0` | 33 | 7.4 |
+| `Kissing.Cert.OkS1` | 21 | 6.7 |
+| `Kissing.Cert.OkS2` | 23 | 6.7 |
+| `Kissing.Cert.OkS3` | 27 | 6.7 |
+| `Kissing.Cert.OkS4` | 24 | 6.7 |
+| `Kissing.Cert.OkS5` | 23 | 6.7 |
+| `Kissing.Cert.OkS6` | 27 | 6.7 |
+| `Kissing.Cert.OkS7` | 19 | 6.7 |
+| `Kissing.Cert.OkS8` | 22 | 6.7 |
+| `Kissing.Cert.OkS9` | 27 | 6.7 |
+| `Kissing.Cert.OkS10` | 22 | 6.4 |
+| `Kissing.Cert.Check` | 20 | 6.4 |
+| `Kissing.Twelve` | 25 | 6.4 |
+| `Kissing.Solution` | 18 | 6.4 |
+| `Kissing.Axioms` | 13 | 6.4 |
+
+Total 26 min; largest peak 8.8 GB (`Kissing.Cert.ChkS0`).
 
 ## Upstream code and related work
 

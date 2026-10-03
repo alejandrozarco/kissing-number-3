@@ -1,6 +1,6 @@
 Building Kissing.Statement
 WARNING: THIS IS NOT REAL LANDRUN! UNSAFELY RUNNING exec lake build Kissing.Statement
-⚠ [8924/8924] Built Kissing.Statement (59s)
+⚠ [8924/8924] Built Kissing.Statement (196s)
 warning: Kissing/Statement.lean:37:8: declaration uses `sorry`
 warning: Kissing/Statement.lean:42:8: declaration uses `sorry`
 warning: Kissing/Statement.lean:46:8: declaration uses `sorry`
@@ -12,9 +12,9 @@ WARNING: THIS IS NOT REAL LANDRUN! UNSAFELY RUNNING exec <tools>/lean4export/.la
 Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, Kissing.exists_isKissing_encard_eq_twelve, Kissing.encard_le_twelve_of_isKissing, Kissing.kissingNumber_three, Kissing.isKissing_antipodal, Kissing.not_isKissing_close, Kissing.not_isKissing_far, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Kissing.Statement
 Building Kissing.Solution
 WARNING: THIS IS NOT REAL LANDRUN! UNSAFELY RUNNING exec lake build Kissing.Solution
-✔ [8923/8929] Built ThomsonGen.Preamble (46s)
-✔ [8924/8931] Built ThomsonGen.Kron (26s)
-⚠ [8925/8931] Built ThomsonGen.ThreePoint (33s)
+✔ [8923/8929] Built ThomsonGen.Preamble (33s)
+✔ [8924/8931] Built ThomsonGen.Kron (17s)
+⚠ [8926/8962] Built ThomsonGen.ThreePoint (24s)
 warning: ThomsonGen/ThreePoint.lean:161:30: This simp argument is unused:
   real_inner_self_eq_norm_sq
 
@@ -33,55 +33,55 @@ Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
 warning: ThomsonGen/ThreePoint.lean:243:85: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
 
 Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
-✔ [8927/8962] Built ThomsonGen.M2 (92s)
-⚠ [8928/8962] Built ThomsonGen.Cert1 (25s)
+✔ [8927/8962] Built ThomsonGen.M2 (64s)
+⚠ [8928/8962] Built ThomsonGen.Cert1 (16s)
 warning: ThomsonGen/Cert1.lean:48:19: `if_pos` has been deprecated: Use `ite_eq_left` instead
 warning: ThomsonGen/Cert1.lean:48:31: `if_pos` has been deprecated: Use `ite_eq_left` instead
 warning: ThomsonGen/Cert1.lean:49:10: `if_neg` has been deprecated: Use `ite_eq_right` instead
 warning: ThomsonGen/Cert1.lean:49:20: `if_neg` has been deprecated: Use `ite_eq_right` instead
 warning: ThomsonGen/Cert1.lean:74:10: `if_neg` has been deprecated: Use `ite_eq_right` instead
 warning: ThomsonGen/Cert1.lean:74:20: `if_neg` has been deprecated: Use `ite_eq_right` instead
-✔ [8929/8962] Built Kissing.Bound (15s)
-✔ [8930/8962] Built ThomsonGen.Cert3 (25s)
-✔ [8931/8962] Built ThomsonGen.CertF (18s)
+✔ [8929/8962] Built Kissing.Bound (12s)
+✔ [8930/8962] Built ThomsonGen.Cert3 (21s)
+✔ [8931/8962] Built ThomsonGen.CertF (16s)
 ✔ [8932/8962] Built ThomsonGen.Case1Stat (11s)
-✔ [8933/8962] Built Kissing.CertK (16s)
-✔ [8934/8962] Built Kissing.Cert.Data (35s)
-✔ [8935/8962] Built Kissing.Cert.ChkF (28s)
-✔ [8936/8962] Built Kissing.Cert.ChkS0 (75s)
-✔ [8937/8962] Built Kissing.Cert.ChkS1 (34s)
-✔ [8938/8962] Built Kissing.Cert.ChkS2 (29s)
-✔ [8939/8962] Built Kissing.Cert.ChkS3 (33s)
-✔ [8940/8962] Built Kissing.Cert.ChkS4 (31s)
-✔ [8941/8962] Built Kissing.Cert.ChkS5 (33s)
-✔ [8942/8962] Built Kissing.Cert.ChkS6 (36s)
-✔ [8943/8962] Built Kissing.Cert.ChkS7 (31s)
-✔ [8944/8962] Built Kissing.Cert.ChkS8 (26s)
-✔ [8945/8962] Built Kissing.Cert.ChkS9 (25s)
-✔ [8946/8962] Built Kissing.Cert.ChkS10 (16s)
-✔ [8947/8962] Built Kissing.Cert.ChkId (15s)
-✔ [8948/8962] Built Kissing.Cert.OkF (15s)
-✔ [8949/8962] Built Kissing.Cert.OkS0 (36s)
-✔ [8950/8962] Built Kissing.Cert.OkS1 (17s)
-✔ [8951/8962] Built Kissing.Cert.OkS2 (19s)
-✔ [8952/8962] Built Kissing.Cert.OkS3 (20s)
-✔ [8953/8962] Built Kissing.Cert.OkS4 (15s)
-✔ [8954/8962] Built Kissing.Cert.OkS5 (16s)
-✔ [8955/8962] Built Kissing.Cert.OkS6 (20s)
-✔ [8956/8962] Built Kissing.Cert.OkS7 (20s)
-✔ [8957/8962] Built Kissing.Cert.OkS8 (21s)
-✔ [8958/8962] Built Kissing.Cert.OkS9 (16s)
-✔ [8959/8962] Built Kissing.Cert.OkS10 (15s)
-✔ [8960/8962] Built Kissing.Cert.Check (11s)
-✔ [8961/8962] Built Kissing.Twelve (16s)
-✔ [8962/8962] Built Kissing.Solution (15s)
+✔ [8933/8962] Built Kissing.CertK (14s)
+✔ [8934/8962] Built Kissing.Cert.Data (25s)
+✔ [8935/8962] Built Kissing.Cert.ChkF (22s)
+✔ [8936/8962] Built Kissing.Cert.ChkS0 (57s)
+✔ [8937/8962] Built Kissing.Cert.ChkS1 (26s)
+✔ [8938/8962] Built Kissing.Cert.ChkS2 (26s)
+✔ [8939/8962] Built Kissing.Cert.ChkS3 (26s)
+✔ [8940/8962] Built Kissing.Cert.ChkS4 (24s)
+✔ [8941/8962] Built Kissing.Cert.ChkS5 (24s)
+✔ [8942/8962] Built Kissing.Cert.ChkS6 (24s)
+✔ [8943/8962] Built Kissing.Cert.ChkS7 (23s)
+✔ [8944/8962] Built Kissing.Cert.ChkS8 (24s)
+✔ [8945/8962] Built Kissing.Cert.ChkS9 (23s)
+✔ [8946/8962] Built Kissing.Cert.ChkS10 (13s)
+✔ [8947/8962] Built Kissing.Cert.ChkId (10s)
+✔ [8948/8962] Built Kissing.Cert.OkF (9.8s)
+✔ [8949/8962] Built Kissing.Cert.OkS0 (28s)
+✔ [8950/8962] Built Kissing.Cert.OkS1 (14s)
+✔ [8951/8962] Built Kissing.Cert.OkS2 (14s)
+✔ [8952/8962] Built Kissing.Cert.OkS3 (14s)
+✔ [8953/8962] Built Kissing.Cert.OkS4 (14s)
+✔ [8954/8962] Built Kissing.Cert.OkS5 (14s)
+✔ [8955/8962] Built Kissing.Cert.OkS6 (14s)
+✔ [8956/8962] Built Kissing.Cert.OkS7 (14s)
+✔ [8957/8962] Built Kissing.Cert.OkS8 (14s)
+✔ [8958/8962] Built Kissing.Cert.OkS9 (14s)
+✔ [8959/8962] Built Kissing.Cert.OkS10 (10s)
+✔ [8960/8962] Built Kissing.Cert.Check (9.6s)
+✔ [8961/8962] Built Kissing.Twelve (11s)
+✔ [8962/8962] Built Kissing.Solution (12s)
 Build completed successfully (8962 jobs).
 WARNING: THIS IS NOT REAL LANDRUN! UNSAFELY RUNNING exec <tools>/lean4export/.lake/build/bin/lean4export Kissing.Solution -- Quot Quot.mk Quot.lift Quot.ind Kissing.exists_isKissing_encard_eq_twelve Kissing.encard_le_twelve_of_isKissing Kissing.kissingNumber_three Kissing.isKissing_antipodal Kissing.not_isKissing_close Kissing.not_isKissing_far propext Quot.sound Classical.choice Nat.add Nat.sub Nat.mul Nat.pow Nat.gcd Nat.div Nat.mod Nat.beq Nat.ble Nat.land Nat.lor Nat.xor Nat.shiftLeft Nat.shiftRight String.ofList Char.ofNat List eagerReduce Nat String String.mk Char optParam autoParam semiOutParam outParam
 Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, Kissing.exists_isKissing_encard_eq_twelve, Kissing.encard_le_twelve_of_isKissing, Kissing.kissingNumber_three, Kissing.isKissing_antipodal, Kissing.not_isKissing_close, Kissing.not_isKissing_far, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Kissing.Solution
 Running Lean default kernel on solution.
 Lean default kernel accepts the solution
 Your solution is okay!
-real 1784.15
-user 1233.97
-sys 374.11
+real 1577.02
+user 1016.04
+sys 316.55
 COMPARATOR EXIT: 0
