@@ -6,10 +6,13 @@ Status: **Lean 4 formalisation, not peer reviewed.** Prepared 2026-10-02. **Prod
 of the repository owner; see [`AI_DISCLOSURE.md`](AI_DISCLOSURE.md).
 
 > [!IMPORTANT]
-> This repository contains an AI-produced **warrant**: a machine-checked Lean proof that no human has digested. The
-> theorem itself is classical (Schütte and van der Waerden, 1953). The Lean development, the certificate and their
-> correspondence with the stated theorem have not been checked by a human expert. We welcome a human review, and
-> credit for a readable treatment belongs to whoever writes one. Questions, checks and corrections:
+> This repository is a public, timestamped, AI-produced **warrant** for a Lean 4 proof that the kissing number in
+> dimension 3 is 12, a classical theorem (K. Schütte and B. L. van der Waerden, Math. Ann. 125 (1953)): a
+> machine-checked argument that no human has yet digested. The theorem was settled in 1953; we do not regard this
+> formal argument as settled until it has been checked independently.
+> Independent verification and human-readable expositions are welcome, and credit for a human-readable proof belongs
+> to whoever writes one. To refer to the computational result, please cite the archived repository
+> ([10.5281/zenodo.23100212](https://doi.org/10.5281/zenodo.23100212)). Questions, checks and corrections:
 > [GitHub issues](https://github.com/alejandrozarco/kissing-number-3/issues).
 
 Archived on Zenodo: [10.5281/zenodo.23100212](https://doi.org/10.5281/zenodo.23100212) (all versions).
@@ -50,7 +53,8 @@ Checks recorded in [`verification/`](verification/):
 - Comparator: the six theorems of `lean/comparator.json` have the statements of `lean/Kissing/Statement.lean`, use only
   the axioms `propext`, `Quot.sound`, `Classical.choice`, and are accepted by the Lean kernel.
 - `#print axioms` for all six: `[propext, Classical.choice, Quot.sound]`.
-- A clean build of every module, one at a time from a fresh copy, with wall time and peak memory (table below).
+- A clean build of the 41 modules the proof uses, one at a time from a fresh copy, with wall time and peak memory
+  (table below).
 
 The files contain no `sorry` outside `Statement.lean` and no `native_decide`.
 
@@ -157,7 +161,9 @@ bash scripts/build_test.sh    # every module one at a time (or: lake build, if t
 lake env lean Kissing/Axioms.lean
 ```
 
-`lean/scripts/run_comparator.sh` runs [Comparator](https://github.com/leanprover/comparator) (pins in the script).
+`lean/scripts/run_comparator.sh` runs [Comparator](https://github.com/leanprover/comparator); without prebuilt tools it
+fetches and builds them at the revisions pinned in `lean/scripts/tools.sh`, which also records the sha256 of the
+binaries used for `verification/`.
 `lake build` may compile several modules in parallel; the certificate modules form one import chain to limit this.
 
 Certificate (Python 3, `python-flint`, `numpy`; `cvxpy` with Clarabel only to re-solve):
@@ -165,6 +171,7 @@ Certificate (Python 3, `python-flint`, `numpy`; `cvxpy` with Clarabel only to re
 ```sh
 cd numerics/kissing3
 python3 check_cert_k3.py cert_D10.json                                    # exact check (about 25 s)
+python3 check_controls_k3.py cert_D10.json                                # tampered certificates must be rejected
 python3 round_k3.py sol/fixn_D10_n13_mu0.5.npz cert.json 24               # re-round the float solution
 python3 ../../lean/gen/emit_k3.py cert_D10.json --outdir /tmp/Cert       # re-emit the Lean data
 ./run.sh fixn 10 13 && ./run.sh mu 10 13 0.5                              # re-solve (float)
@@ -172,55 +179,56 @@ python3 ../../lean/gen/emit_k3.py cert_D10.json --outdir /tmp/Cert       # re-em
 
 ## Clean build
 
-Every module compiled one at a time (`lean/scripts/build_test.sh`, `lean -j1`) from a fresh copy of `lean/`
-after `regen.sh` and `lake exe cache get`, on Linux x86_64 (`verification/build_test.tsv`). Wall time includes
-loading Mathlib for each module.
+The 41 modules reachable from the build roots `Kissing.Statement`, `Kissing.Solution` and
+`Kissing.Axioms`, each compiled one at a time (`lean/scripts/build_test.sh`, `lean -j1`) from a fresh copy of
+`lean/` after `regen.sh` and `lake exe cache get`, on Linux x86_64 (`verification/build_test.tsv`). Wall time
+includes loading Mathlib for each module. Memory in GiB ($`2^{30}`$ bytes).
 
-| module | wall (s) | peak RSS (GB) |
+| module | wall (s) | peak RSS (GiB) |
 |---|---:|---:|
-| `Kissing.Statement` | 307 | 6.3 |
-| `ThomsonGen.Preamble` | 47 | 6.4 |
-| `ThomsonGen.ThreePoint` | 49 | 6.5 |
-| `ThomsonGen.Kron` | 31 | 6.4 |
-| `ThomsonGen.Cert1` | 21 | 6.4 |
-| `ThomsonGen.Cert3` | 40 | 6.5 |
-| `ThomsonGen.Case1Stat` | 20 | 6.4 |
-| `ThomsonGen.M2` | 96 | 8.5 |
-| `ThomsonGen.CertF` | 30 | 6.4 |
-| `Kissing.Bound` | 22 | 6.4 |
-| `Kissing.CertK` | 25 | 6.4 |
-| `Kissing.Cert.Data` | 30 | 6.4 |
-| `Kissing.Cert.ChkF` | 34 | 6.5 |
-| `Kissing.Cert.ChkS0` | 86 | 8.8 |
-| `Kissing.Cert.ChkS1` | 37 | 7.1 |
-| `Kissing.Cert.ChkS2` | 37 | 7.1 |
-| `Kissing.Cert.ChkS3` | 26 | 7.1 |
-| `Kissing.Cert.ChkS4` | 26 | 7.1 |
-| `Kissing.Cert.ChkS5` | 33 | 7.1 |
-| `Kissing.Cert.ChkS6` | 37 | 7.1 |
-| `Kissing.Cert.ChkS7` | 37 | 7.1 |
-| `Kissing.Cert.ChkS8` | 27 | 7.1 |
-| `Kissing.Cert.ChkS9` | 36 | 7.1 |
-| `Kissing.Cert.ChkS10` | 22 | 6.5 |
-| `Kissing.Cert.ChkId` | 20 | 6.4 |
-| `Kissing.Cert.OkF` | 16 | 6.4 |
-| `Kissing.Cert.OkS0` | 33 | 7.4 |
-| `Kissing.Cert.OkS1` | 21 | 6.7 |
-| `Kissing.Cert.OkS2` | 23 | 6.7 |
-| `Kissing.Cert.OkS3` | 27 | 6.7 |
-| `Kissing.Cert.OkS4` | 24 | 6.7 |
-| `Kissing.Cert.OkS5` | 23 | 6.7 |
-| `Kissing.Cert.OkS6` | 27 | 6.7 |
-| `Kissing.Cert.OkS7` | 19 | 6.7 |
-| `Kissing.Cert.OkS8` | 22 | 6.7 |
-| `Kissing.Cert.OkS9` | 27 | 6.7 |
-| `Kissing.Cert.OkS10` | 22 | 6.4 |
-| `Kissing.Cert.Check` | 20 | 6.4 |
-| `Kissing.Twelve` | 25 | 6.4 |
-| `Kissing.Solution` | 18 | 6.4 |
-| `Kissing.Axioms` | 13 | 6.4 |
+| `Kissing.Statement` | 307 | 6.29 |
+| `ThomsonGen.Preamble` | 47 | 6.43 |
+| `ThomsonGen.ThreePoint` | 49 | 6.47 |
+| `ThomsonGen.Kron` | 31 | 6.40 |
+| `ThomsonGen.Cert1` | 21 | 6.42 |
+| `ThomsonGen.Cert3` | 40 | 6.45 |
+| `ThomsonGen.Case1Stat` | 20 | 6.39 |
+| `ThomsonGen.M2` | 96 | 8.53 |
+| `ThomsonGen.CertF` | 30 | 6.41 |
+| `Kissing.Bound` | 22 | 6.39 |
+| `Kissing.CertK` | 25 | 6.43 |
+| `Kissing.Cert.Data` | 30 | 6.38 |
+| `Kissing.Cert.ChkF` | 34 | 6.54 |
+| `Kissing.Cert.ChkS0` | 86 | 8.82 |
+| `Kissing.Cert.ChkS1` | 37 | 7.08 |
+| `Kissing.Cert.ChkS2` | 37 | 7.09 |
+| `Kissing.Cert.ChkS3` | 26 | 7.09 |
+| `Kissing.Cert.ChkS4` | 26 | 7.08 |
+| `Kissing.Cert.ChkS5` | 33 | 7.09 |
+| `Kissing.Cert.ChkS6` | 37 | 7.09 |
+| `Kissing.Cert.ChkS7` | 37 | 7.08 |
+| `Kissing.Cert.ChkS8` | 27 | 7.08 |
+| `Kissing.Cert.ChkS9` | 36 | 7.09 |
+| `Kissing.Cert.ChkS10` | 22 | 6.53 |
+| `Kissing.Cert.ChkId` | 20 | 6.39 |
+| `Kissing.Cert.OkF` | 16 | 6.39 |
+| `Kissing.Cert.OkS0` | 33 | 7.45 |
+| `Kissing.Cert.OkS1` | 21 | 6.67 |
+| `Kissing.Cert.OkS2` | 23 | 6.65 |
+| `Kissing.Cert.OkS3` | 27 | 6.67 |
+| `Kissing.Cert.OkS4` | 24 | 6.67 |
+| `Kissing.Cert.OkS5` | 23 | 6.66 |
+| `Kissing.Cert.OkS6` | 27 | 6.67 |
+| `Kissing.Cert.OkS7` | 19 | 6.67 |
+| `Kissing.Cert.OkS8` | 22 | 6.65 |
+| `Kissing.Cert.OkS9` | 27 | 6.67 |
+| `Kissing.Cert.OkS10` | 22 | 6.43 |
+| `Kissing.Cert.Check` | 20 | 6.38 |
+| `Kissing.Twelve` | 25 | 6.40 |
+| `Kissing.Solution` | 18 | 6.40 |
+| `Kissing.Axioms` | 13 | 6.35 |
 
-Total 26 min; largest peak 8.8 GB (`Kissing.Cert.ChkS0`).
+Total 26 min; largest peak 8.82 GiB (`Kissing.Cert.ChkS0`).
 
 ## Upstream code and related work
 
@@ -249,4 +257,4 @@ Total 26 min; largest peak 8.8 GB (`Kissing.Cert.ChkS0`).
 
 Apache License 2.0 ([`LICENSE`](LICENSE)), copyright 2026 the repository owner (alejandrozarco). Not covered: the
 upstream modules that `lean/regen.sh` regenerates (not stored here), the upstream material in the adapted
-declarations named in the files, and the upstream material in `lean/scripts/run_comparator.sh`.
+declarations named in the files, and the upstream material in `lean/scripts/run_comparator.sh` and `lean/scripts/tools.sh`.

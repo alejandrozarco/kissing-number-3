@@ -1,0 +1,10 @@
+rejected: degree field -1 with a trivial false certificate: CERTIFICATE REJECTED: identity fails at (0, 0, 0)
+rejected: degree field 1 with a trivial false certificate: CERTIFICATE REJECTED: identity fails at (0, 0, 0)
+rejected: margin e raised to 1: CERTIFICATE REJECTED: identity fails at (-10/21, -10/21, -10/21)
+rejected: one kernel-block entry changed: CERTIFICATE REJECTED: identity fails at (-10/21, -10/21, -10/21)
+rejected: one SOS entry changed (kept symmetric): CERTIFICATE REJECTED: identity fails at (-10/21, -10/21, -10/21)
+rejected: Gram-determinant block removed: CERTIFICATE REJECTED: identity fails at (-10/21, -10/21, -10/21)
+rejected: multiplier 1/2-u relabelled 1+u: CERTIFICATE REJECTED: identity fails at (-10/21, -10/21, -10/21)
+rejected: n changed to 12: CERTIFICATE REJECTED: n must be the integer 13
+rejected: negative exponent in a basis: CERTIFICATE REJECTED: SOS block 1: basis must be a non-empty list of exponent triples of non-negative integers
+ALL CONTROLS REJECTED

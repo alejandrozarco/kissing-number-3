@@ -6,7 +6,8 @@ the work and decided on scope and publication. The owner did not check the mathe
 
 **Models**
 - Claude Opus 5.5 (Anthropic, via Claude Code) did the work.
-- The review was run as a separate read-only instance of Claude Opus 5.5 without access to the working context.
+- Reviews were run as separate read-only instances of Claude Opus 5.5 (two, without access to the working context) and
+  gpt-6-astra (OpenAI, via the Codex CLI).
 - The commits carry a `Co-Authored-By: Claude Opus 5.5` trailer.
 
 **Review and errors found.** The review found no mathematical error. It asked for:
@@ -15,7 +16,12 @@ the work and decided on scope and publication. The owner did not check the mathe
 - a Comparator run and a package that builds on its own (now: `lean/regen.sh`, `lean/comparator.json`);
 - a further test of the definition, a ball that does not touch the central ball (now `not_isKissing_far`).
 
-Problems found and fixed during the work: one certificate-check module needed more memory than intended and was split
+Problems found by the reviews and fixed: the stand-alone Python checker took the degree of the certificate from
+the file, so a malformed file could skip the identity test (it now computes the degree from the data, validates its
+input, and `numerics/kissing3/check_controls_k3.py` checks that tampered certificates are rejected); the
+upstream-text scanner selected no files when run without arguments (it now scans `lean/Kissing/` and fails on an
+empty selection); memory figures were labelled GB instead of GiB; the build coverage and the Comparator tool revisions
+were stated imprecisely. Problems found and fixed during the work: one certificate-check module needed more memory than intended and was split
 into one module per block; adapted upstream declarations lacked per-declaration attribution, which
 `lean/ThomsonGen/scripts/scan_upstream.py` now checks.
 

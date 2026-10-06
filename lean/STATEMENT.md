@@ -8,7 +8,7 @@ Compiles with Lean v4.34.1 and the pinned Mathlib; the only warnings are the `so
 | `E d := EuclideanSpace ℝ (Fin d)` | Ordinary d-dimensional space with ordinary distance. |
 | `IsKissing S`: `∀ x ∈ S, ‖x‖ = 2` | Every outer ball (radius 1, centre `x`) touches the central ball (radius 1, centre 0): the centres are 2 apart. |
 | `IsKissing S`: `∀ x y ∈ S, x ≠ y → 2 ≤ dist x y` | No two outer balls overlap: their centres are at least 2 apart (touching is allowed). |
-| `kissingNumber d := ⨆ S, IsKissing S → S.encard` | The kissing number is the largest number of outer balls that fit. Infinite counts are allowed, so nothing is cut off silently. |
+| `kissingNumber d := ⨆ (S : Set (E d)) (_ : IsKissing S), S.encard` | The kissing number is the largest number of outer balls that fit. Infinite counts are allowed, so nothing is cut off silently. |
 | `exists_isKissing_encard_eq_twelve` | 12 balls fit around one in 3D (rational approximations of the icosahedron vertices). |
 | `encard_le_twelve_of_isKissing` | Any arrangement in 3D has at most 12 balls. Infinite arrangements are covered and ruled out too. |
 | `kissingNumber_three : kissingNumber 3 = 12` | The kissing number in 3D is exactly 12. |
